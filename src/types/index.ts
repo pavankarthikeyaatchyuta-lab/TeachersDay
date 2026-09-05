@@ -37,12 +37,10 @@ export interface MiniSurprise {
 }
 
 export interface JourneyStage {
-  id: string;
+  step: string;
   icon: string;
   title: string;
-  tagline: string;
-  mentorName: string;
-  mentorId: TeacherId;
-  mentorRole: string;
+  headline: string;
+  supportingText: string;
   color: string;
 }

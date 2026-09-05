@@ -88,7 +88,7 @@ function MainApp() {
         />
 
         {/* AIML 7-Stage Department Learning Journey */}
-        <DepartmentJourney onSelectTeacher={handleSelectTeacher} />
+        <DepartmentJourney />
 
         {/* Introduction Section: "More Than a Teacher" */}
         <AppreciationSection />

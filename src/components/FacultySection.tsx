@@ -23,8 +23,7 @@ export const FacultySection = ({ onSelectTeacher }: FacultySectionProps) => {
     badgeIcon: React.ReactNode, 
     emblemIcon: React.ReactNode, 
     accentBorder: string,
-    accentBg: string,
-    isWide: boolean = false
+    accentBg: string
   ) => {
     return (
       <motion.div
@@ -34,26 +33,24 @@ export const FacultySection = ({ onSelectTeacher }: FacultySectionProps) => {
         viewport={{ once: true }}
         transition={{ duration: 0.6, ease: 'easeOut' }}
         whileHover={{ y: -8 }}
-        className={`group relative rounded-3xl p-6 sm:p-8 md:p-9 ${accentBg} border-2 ${accentBorder} shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between overflow-hidden ${
-          isWide ? 'md:col-span-2 lg:col-span-2' : ''
-        }`}
+        className={`group relative rounded-3xl p-6 sm:p-8 ${accentBg} border-2 ${accentBorder} shadow-sm hover:shadow-2xl transition-all duration-300 flex flex-col justify-between overflow-hidden w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.5rem)] max-w-md`}
       >
         {/* Subtle decorative background gradient glow */}
-        <div className="absolute top-0 right-0 w-64 h-64 bg-radial from-white/60 to-transparent rounded-full blur-2xl pointer-events-none group-hover:scale-125 transition-transform duration-500" />
+        <div className="absolute top-0 right-0 w-56 h-56 bg-radial from-white/60 to-transparent rounded-full blur-2xl pointer-events-none group-hover:scale-125 transition-transform duration-500" />
 
         <div>
           {/* Top Badge & Role */}
-          <div className="flex items-center justify-between gap-4">
-            <span className={`inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-semibold uppercase tracking-wider ${teacher.cardTheme.badgeBg}`}>
+          <div className="flex items-center justify-between gap-3">
+            <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold uppercase tracking-wider ${teacher.cardTheme.badgeBg}`}>
               {badgeIcon}
               <span>{teacher.roleBadge}</span>
             </span>
-            <span className="text-xs text-slate-400 font-medium">AIML Department</span>
+            <span className="text-[11px] text-slate-400 font-medium">AIML Department</span>
           </div>
 
           {/* Emblem Icon / Motif */}
           <div className="my-6 flex items-center justify-center">
-            <div className="relative w-24 h-24 sm:w-28 sm:h-28 rounded-3xl bg-white/90 border border-[#EADBCA] flex items-center justify-center shadow-inner group-hover:rotate-2 transition-transform duration-500">
+            <div className="relative w-24 h-24 rounded-3xl bg-white/90 border border-[#EADBCA] flex items-center justify-center shadow-inner group-hover:rotate-2 transition-transform duration-500">
               <div className="absolute inset-1.5 border border-dashed border-[#EADBCA]/80 rounded-2xl" />
               {emblemIcon}
             </div>
@@ -61,13 +58,13 @@ export const FacultySection = ({ onSelectTeacher }: FacultySectionProps) => {
 
           {/* Name, Headline & Description */}
           <div className="text-center">
-            <h3 className="text-2xl sm:text-3xl font-display font-semibold text-slate-900 tracking-tight">
+            <h3 className="text-2xl font-display font-semibold text-slate-900 tracking-tight">
               {teacher.name}
             </h3>
-            <p className="mt-1 text-xs sm:text-sm font-semibold text-slate-600">
+            <p className="mt-1 text-xs font-semibold text-slate-600">
               {teacher.headline}
             </p>
-            <p className="mt-3 text-slate-600 text-xs sm:text-sm leading-relaxed italic max-w-md mx-auto">
+            <p className="mt-3 text-slate-600 text-xs sm:text-sm leading-relaxed italic max-w-sm mx-auto">
               "{teacher.quoteSnippet}"
             </p>
           </div>
@@ -85,7 +82,7 @@ export const FacultySection = ({ onSelectTeacher }: FacultySectionProps) => {
               setCursorType('default');
               setCursorText(null);
             }}
-            className={`w-full py-3.5 px-6 rounded-2xl font-medium text-sm sm:text-base shadow-md hover:shadow-xl transition-all flex items-center justify-center gap-2 group cursor-pointer ${teacher.cardTheme.buttonBg}`}
+            className={`w-full py-3.5 px-6 rounded-2xl font-medium text-sm shadow-md hover:shadow-xl transition-all flex items-center justify-center gap-2 group cursor-pointer ${teacher.cardTheme.buttonBg}`}
           >
             <span>Open Their Story →</span>
           </MagneticButton>
@@ -122,7 +119,7 @@ export const FacultySection = ({ onSelectTeacher }: FacultySectionProps) => {
           transition={{ duration: 0.7, delay: 0.1 }}
           className="text-3xl sm:text-4xl md:text-5xl font-display font-medium text-[#0F172A] tracking-tight"
         >
-          The People Behind Our Journey
+          THE PEOPLE BEHIND OUR JOURNEY
         </motion.h2>
 
         <motion.p
@@ -132,77 +129,76 @@ export const FacultySection = ({ onSelectTeacher }: FacultySectionProps) => {
           transition={{ duration: 0.7, delay: 0.2 }}
           className="mt-4 text-base sm:text-lg text-slate-600 font-light max-w-xl mx-auto"
         >
-          Five mentors. Five different roles. One common goal — helping us become better.
+          Five mentors. Different strengths. One common goal — helping us become better.
         </motion.p>
       </div>
 
-      {/* Asymmetric 5-Mentor Layout */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8 items-stretch">
-        {/* 1. SARADA MADAM - Prominent Full Width HoD Card */}
+      {/* Completely Equal 5-Mentor Layout */}
+      <div className="flex flex-wrap justify-center gap-6 lg:gap-8 items-stretch max-w-6xl mx-auto">
+        {/* 1. SARADA MADAM */}
         {renderMentorCard(
           sarada,
           <Award className="w-3.5 h-3.5 text-amber-700" />,
           <div className="flex flex-col items-center">
             <span className="text-3xl sm:text-4xl">🌷</span>
             <span className="text-[10px] uppercase font-bold tracking-widest mt-1 text-amber-900/80">
-              Department Vision
+              Leadership &amp; Vision
             </span>
           </div>,
           'border-amber-300 hover:border-amber-500',
-          'bg-gradient-to-b from-[#FFFFFF] via-[#FFFDF9] to-[#FAF4E8]',
-          true
+          'bg-gradient-to-b from-[#FFFFFF] via-[#FFFDF9] to-[#FAF4E8]'
         )}
 
-        {/* 2. BHAGAWAN SIR - Training & Career */}
+        {/* 2. BHAGAWAN SIR */}
         {renderMentorCard(
           bhagawan,
           <Compass className="w-3.5 h-3.5 text-sky-700" />,
           <div className="flex flex-col items-center">
-            <Compass className="w-10 h-10 text-sky-600 stroke-[1.5]" />
+            <Compass className="w-9 h-9 text-sky-600 stroke-[1.5]" />
             <span className="text-[10px] uppercase font-bold tracking-widest mt-1 text-sky-900/80">
-              Career &amp; Growth
+              Career &amp; Direction
             </span>
           </div>,
           'border-sky-300 hover:border-sky-500',
           'bg-gradient-to-b from-[#FFFFFF] via-[#F8FBFE] to-[#EFF6FC]'
         )}
 
-        {/* 3. KRANTI MADAM - Teaching & Mentorship */}
+        {/* 3. KRANTI MADAM */}
         {renderMentorCard(
           kranti,
-          <span className="text-xs">🌻</span>,
+          <BookOpen className="w-3.5 h-3.5 text-amber-700" />,
           <div className="flex flex-col items-center">
-            <BookOpen className="w-10 h-10 text-amber-600 stroke-[1.5]" />
+            <span className="text-3xl sm:text-4xl">🌻</span>
             <span className="text-[10px] uppercase font-bold tracking-widest mt-1 text-amber-900/80">
-              Meaningful Care
+              Teaching &amp; Care
             </span>
           </div>,
           'border-yellow-300 hover:border-yellow-500',
           'bg-gradient-to-b from-[#FFFFFF] via-[#FFFDF8] to-[#FFF8EA]'
         )}
 
-        {/* 4. KISHORE SIR - Innovation & Hackathons */}
+        {/* 4. KISHORE SIR */}
         {renderMentorCard(
           kishore,
           <Lightbulb className="w-3.5 h-3.5 text-orange-600" />,
           <div className="flex flex-col items-center">
-            <Lightbulb className="w-10 h-10 text-orange-600 stroke-[1.5]" />
+            <Lightbulb className="w-9 h-9 text-orange-600 stroke-[1.5]" />
             <span className="text-[10px] uppercase font-bold tracking-widest mt-1 text-orange-900/80">
-              Build &amp; Code
+              Innovation &amp; Build
             </span>
           </div>,
           'border-orange-300 hover:border-orange-500',
           'bg-gradient-to-b from-[#FFFFFF] via-[#FFFDF9] to-[#FFF5EC]'
         )}
 
-        {/* 5. RADHA KRISHNA SIR - Discipline & Values */}
+        {/* 5. RADHA KRISHNA SIR */}
         {renderMentorCard(
           radhakrishna,
           <Shield className="w-3.5 h-3.5 text-indigo-700" />,
           <div className="flex flex-col items-center">
-            <Shield className="w-10 h-10 text-indigo-700 stroke-[1.5]" />
+            <Shield className="w-9 h-9 text-indigo-700 stroke-[1.5]" />
             <span className="text-[10px] uppercase font-bold tracking-widest mt-1 text-indigo-900/80">
-              Conduct &amp; Values
+              Discipline &amp; Character
             </span>
           </div>,
           'border-indigo-300 hover:border-indigo-500',

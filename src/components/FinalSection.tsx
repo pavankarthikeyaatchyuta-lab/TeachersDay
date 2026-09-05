@@ -108,7 +108,7 @@ export const FinalSection = () => {
               </div>
 
               {/* Sequential Gratitude Reveal Lines */}
-              <div className="space-y-3.5 max-w-lg mx-auto text-base sm:text-xl font-medium text-slate-700 leading-relaxed font-serif italic py-2">
+              <div className="space-y-3 max-w-lg mx-auto text-base sm:text-xl font-medium text-slate-700 leading-relaxed font-serif italic py-2">
                 <motion.p
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
@@ -128,29 +128,28 @@ export const FinalSection = () => {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 0.9, duration: 0.5 }}
                 >
-                  "Someone encouraged us. 🚀"
+                  "Someone encouraged us. 💡"
                 </motion.p>
                 <motion.p
                   initial={{ opacity: 0, x: 16 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 1.2, duration: 0.5 }}
                 >
-                  "Someone corrected us. 🛡️"
+                  "Someone challenged us to grow. 🌱"
                 </motion.p>
                 <motion.p
                   initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: 1.5, duration: 0.5 }}
                 >
-                  "Someone believed in us. ❤️"
+                  "Someone reminded us to stay disciplined. 🛡️"
                 </motion.p>
                 <motion.p
-                  initial={{ opacity: 0, scale: 0.9 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 1.8, duration: 0.6 }}
-                  className="text-lg sm:text-2xl font-display not-italic font-semibold text-slate-900 pt-2"
+                  initial={{ opacity: 0, x: 16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1.8, duration: 0.5 }}
                 >
-                  "Together, they helped shape us."
+                  "Someone believed in us. ❤️"
                 </motion.p>
               </div>
 
@@ -211,9 +210,13 @@ export const FinalSection = () => {
                     🛡️
                   </motion.span>
                 </div>
-                <p className="mt-3 text-xs sm:text-sm font-medium text-slate-500 italic">
-                  "Different roles. Different lessons. One unforgettable journey."
-                </p>
+                <div className="mt-4 text-sm sm:text-base font-serif italic text-slate-600 space-y-0.5">
+                  <p>Different roles.</p>
+                  <p>Different lessons.</p>
+                  <p className="font-semibold text-amber-900 not-italic font-display text-base sm:text-lg pt-1">
+                    One unforgettable journey.
+                  </p>
+                </div>
               </motion.div>
 
               {/* Climax and 5 Mentor Names */}
