@@ -2,6 +2,8 @@ import { motion } from 'framer-motion';
 import { Sparkles, Heart, ChevronDown } from 'lucide-react';
 import { MINI_SURPRISES } from '../data/teachers';
 import type { MiniSurprise } from '../types';
+import { useCursor } from '../context/CursorContext';
+import { MagneticButton } from './MagneticButton';
 
 interface HeroProps {
   onTriggerSurprise: (surprise: MiniSurprise) => void;
@@ -9,6 +11,8 @@ interface HeroProps {
 }
 
 export const Hero = ({ onTriggerSurprise, onSelectTeacher }: HeroProps) => {
+  const { setCursorType, setCursorText } = useCursor();
+
   const scrollToNext = () => {
     const el = document.getElementById('intro');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
@@ -180,8 +184,16 @@ export const Hero = ({ onTriggerSurprise, onSelectTeacher }: HeroProps) => {
               <button
                 key={surprise.id}
                 onClick={() => onTriggerSurprise(surprise)}
+                onMouseEnter={() => {
+                  if (surprise.id === 'apple') setCursorType('apple');
+                  else if (surprise.id === 'book') setCursorType('book');
+                  else if (surprise.id === 'lightbulb') setCursorType('lightbulb');
+                  else if (surprise.id === 'heart') setCursorType('heart');
+                  else setCursorType('pointer');
+                }}
+                onMouseLeave={() => setCursorType('default')}
                 title={`Click to open ${surprise.label}`}
-                className="group flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50/60 hover:bg-amber-100/90 border border-amber-200/60 hover:border-amber-300 text-xs font-medium text-slate-700 transition-all hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 shadow-2xs"
+                className="group flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-50/60 hover:bg-amber-100/90 border border-amber-200/60 hover:border-amber-300 text-xs font-medium text-slate-700 transition-all hover:scale-105 active:scale-95 focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 shadow-2xs cursor-pointer"
               >
                 <span className="text-base group-hover:rotate-12 transition-transform">{surprise.icon}</span>
                 <span className="text-slate-800">{surprise.id === 'apple' ? 'Award' : surprise.id === 'book' ? 'Wisdom' : surprise.id === 'lightbulb' ? 'Clarity' : 'Belief'}</span>
@@ -190,27 +202,44 @@ export const Hero = ({ onTriggerSurprise, onSelectTeacher }: HeroProps) => {
           </div>
         </motion.div>
 
-        {/* Quick Teacher Choice CTAs */}
+        {/* Quick Teacher Choice CTAs with Magnetic Effect */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.9 }}
           className="mt-8 flex flex-col sm:flex-row items-center gap-3 w-full max-w-md justify-center"
         >
-          <button
+          <MagneticButton
             onClick={() => onSelectTeacher('sarada')}
+            onMouseEnter={() => {
+              setCursorType('sarada');
+              setCursorText("Open Sarada's surprise");
+            }}
+            onMouseLeave={() => {
+              setCursorType('default');
+              setCursorText(null);
+            }}
             className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-amber-700 via-amber-800 to-amber-900 text-white font-medium text-sm shadow-md hover:shadow-lg hover:from-amber-800 hover:to-amber-950 transition-all flex items-center justify-center gap-2 group cursor-pointer"
           >
             <span>Surprise for Sarada Madam</span>
             <Sparkles className="w-4 h-4 text-amber-300 group-hover:rotate-12 transition-transform" />
-          </button>
-          <button
+          </MagneticButton>
+
+          <MagneticButton
             onClick={() => onSelectTeacher('kranti')}
+            onMouseEnter={() => {
+              setCursorType('kranti');
+              setCursorText("Open Kranti's surprise");
+            }}
+            onMouseLeave={() => {
+              setCursorType('default');
+              setCursorText(null);
+            }}
             className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-orange-600 via-amber-600 to-amber-700 text-white font-medium text-sm shadow-md hover:shadow-lg hover:from-orange-700 hover:to-amber-800 transition-all flex items-center justify-center gap-2 group cursor-pointer"
           >
             <span>Surprise for Kranti Madam</span>
             <span className="text-base group-hover:scale-110 transition-transform">🌻</span>
-          </button>
+          </MagneticButton>
         </motion.div>
       </div>
 

@@ -9,6 +9,7 @@ import {
   Menu, 
   X
 } from 'lucide-react';
+import { useCursor } from '../context/CursorContext';
 
 interface SidebarProps {
   onSelectTeacher: (id: 'sarada' | 'kranti') => void;
@@ -35,6 +36,7 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
   const [activeSection, setActiveSection] = useState('hero');
   const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const { setCursorType } = useCursor();
 
   // Scroll spy to update active section
   useEffect(() => {
@@ -102,6 +104,7 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
         onMouseLeave={() => {
           setIsExpanded(false);
           setHoveredItem(null);
+          setCursorType('default');
         }}
         className="hidden md:flex fixed left-6 top-1/2 -translate-y-1/2 z-50 pointer-events-auto"
       >
@@ -113,7 +116,9 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
           {/* Top Brand / Teachers' Day Header */}
           <button
             onClick={() => scrollToSection('hero')}
-            className="flex items-center gap-3 p-1.5 rounded-2xl hover:bg-amber-50/80 transition-colors text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 overflow-hidden"
+            onMouseEnter={() => setCursorType('sidebar-home')}
+            onMouseLeave={() => setCursorType('default')}
+            className="flex items-center gap-3 p-1.5 rounded-2xl hover:bg-amber-50/80 transition-colors text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 overflow-hidden cursor-pointer"
           >
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-200 via-rose-100 to-rose-200 flex items-center justify-center text-rose-600 shrink-0 shadow-xs group-hover:scale-105 transition-transform">
               <Heart className="w-5 h-5 fill-rose-500 text-rose-500 animate-pulse" />
@@ -152,13 +157,23 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
                 <div 
                   key={item.id} 
                   className="relative flex items-center"
-                  onMouseEnter={() => setHoveredItem(item.id)}
-                  onMouseLeave={() => setHoveredItem(null)}
+                  onMouseEnter={() => {
+                    setHoveredItem(item.id);
+                    if (item.id === 'hero') setCursorType('sidebar-home');
+                    else if (item.id === 'intro') setCursorType('sidebar-appreciation');
+                    else if (item.id === 'teachers') setCursorType('sidebar-teachers');
+                    else if (item.id === 'quote') setCursorType('sidebar-message');
+                    else if (item.id === 'final-tribute') setCursorType('sidebar-thanks');
+                  }}
+                  onMouseLeave={() => {
+                    setHoveredItem(null);
+                    setCursorType('default');
+                  }}
                 >
                   <button
                     onClick={() => scrollToSection(item.id)}
                     aria-current={isActive ? 'page' : undefined}
-                    className={`w-full flex items-center gap-3 p-2 rounded-2xl transition-all duration-200 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 overflow-hidden group ${
+                    className={`w-full flex items-center gap-3 p-2 rounded-2xl transition-all duration-200 text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 overflow-hidden group cursor-pointer ${
                       isActive
                         ? 'bg-gradient-to-r from-amber-100/90 to-rose-100/70 text-amber-950 font-semibold shadow-xs border border-amber-200/60'
                         : 'text-slate-600 hover:text-amber-950 hover:bg-amber-50/70'
@@ -209,8 +224,14 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
             {/* Sarada Madam Button */}
             <div 
               className="relative flex items-center"
-              onMouseEnter={() => setHoveredItem('sarada')}
-              onMouseLeave={() => setHoveredItem(null)}
+              onMouseEnter={() => {
+                setHoveredItem('sarada');
+                setCursorType('sarada');
+              }}
+              onMouseLeave={() => {
+                setHoveredItem(null);
+                setCursorType('default');
+              }}
             >
               <button
                 onClick={() => handleTeacherClick('sarada')}
@@ -258,8 +279,14 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
             {/* Kranti Madam Button */}
             <div 
               className="relative flex items-center"
-              onMouseEnter={() => setHoveredItem('kranti')}
-              onMouseLeave={() => setHoveredItem(null)}
+              onMouseEnter={() => {
+                setHoveredItem('kranti');
+                setCursorType('kranti');
+              }}
+              onMouseLeave={() => {
+                setHoveredItem(null);
+                setCursorType('default');
+              }}
             >
               <button
                 onClick={() => handleTeacherClick('kranti')}

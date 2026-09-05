@@ -1,4 +1,6 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { CursorProvider, useCursor } from './context/CursorContext';
+import { CustomCursor } from './components/CustomCursor';
 import { Sidebar } from './components/Sidebar';
 import { Hero } from './components/Hero';
 import { AppreciationSection } from './components/AppreciationSection';
@@ -12,10 +14,22 @@ import { Toast } from './components/Toast';
 import type { ToastData } from './components/Toast';
 import type { MiniSurprise } from './types';
 
-export function App() {
+function MainApp() {
   const [activeTeacher, setActiveTeacher] = useState<'sarada' | 'kranti' | null>(null);
   const [toast, setToast] = useState<ToastData | null>(null);
   const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const { setCursorType } = useCursor();
+
+  // Synchronize modal state with custom cursor
+  useEffect(() => {
+    if (activeTeacher === 'sarada') {
+      setCursorType('sarada-modal');
+    } else if (activeTeacher === 'kranti') {
+      setCursorType('kranti-modal');
+    } else {
+      setCursorType('default');
+    }
+  }, [activeTeacher, setCursorType]);
 
   const handleSelectTeacher = (id: 'sarada' | 'kranti') => {
     setActiveTeacher(id);
@@ -97,6 +111,15 @@ export function App() {
         onClose={handleCloseToast} 
       />
     </div>
+  );
+}
+
+export function App() {
+  return (
+    <CursorProvider>
+      <CustomCursor />
+      <MainApp />
+    </CursorProvider>
   );
 }
 

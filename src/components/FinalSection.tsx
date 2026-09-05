@@ -2,17 +2,30 @@ import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Heart, Sparkles, RefreshCw } from 'lucide-react';
 import { triggerElegantCelebration } from './Celebration';
+import { useCursor } from '../context/CursorContext';
+import { MagneticButton } from './MagneticButton';
 
 export const FinalSection = () => {
   const [isRevealed, setIsRevealed] = useState(false);
+  const { setCursorType, setIsCelebrationActive } = useCursor();
 
   const handleReveal = () => {
     setIsRevealed(true);
     triggerElegantCelebration();
+    setIsCelebrationActive(true);
+
+    // Return to normal cursor after celebration
+    setTimeout(() => {
+      setIsCelebrationActive(false);
+    }, 6000);
   };
 
   const handleCelebrateAgain = () => {
     triggerElegantCelebration();
+    setIsCelebrationActive(true);
+    setTimeout(() => {
+      setIsCelebrationActive(false);
+    }, 5000);
   };
 
   return (
@@ -48,13 +61,15 @@ export const FinalSection = () => {
               </p>
 
               <div className="pt-4">
-                <button
+                <MagneticButton
                   onClick={handleReveal}
+                  onMouseEnter={() => setCursorType('heart')}
+                  onMouseLeave={() => setCursorType('default')}
                   className="px-8 py-4 rounded-2xl bg-gradient-to-r from-rose-600 via-rose-700 to-amber-700 hover:from-rose-700 hover:to-amber-800 text-white font-medium text-base shadow-xl shadow-rose-900/15 hover:shadow-2xl hover:shadow-rose-900/25 transition-all flex items-center justify-center gap-2.5 mx-auto group cursor-pointer active:scale-95"
                 >
                   <Heart className="w-5 h-5 fill-white text-white group-hover:scale-125 transition-transform" />
                   <span>Reveal Our Tribute ❤️</span>
-                </button>
+                </MagneticButton>
               </div>
             </motion.div>
           ) : (

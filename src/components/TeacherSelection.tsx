@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion';
 import { Sparkles, Award, BookOpen, Compass, Heart } from 'lucide-react';
 import { TEACHERS_DATA } from '../data/teachers';
+import { useCursor } from '../context/CursorContext';
+import { MagneticButton } from './MagneticButton';
 
 interface TeacherSelectionProps {
   onSelectTeacher: (id: 'sarada' | 'kranti') => void;
@@ -9,6 +11,7 @@ interface TeacherSelectionProps {
 export const TeacherSelection = ({ onSelectTeacher }: TeacherSelectionProps) => {
   const sarada = TEACHERS_DATA.sarada;
   const kranti = TEACHERS_DATA.kranti;
+  const { setCursorType, setCursorText } = useCursor();
 
   return (
     <section 
@@ -107,12 +110,20 @@ export const TeacherSelection = ({ onSelectTeacher }: TeacherSelectionProps) => 
 
           {/* Button CTA */}
           <div className="mt-8 pt-6 border-t border-[#F0E6D2] flex flex-col items-center">
-            <button
+            <MagneticButton
               onClick={() => onSelectTeacher('sarada')}
+              onMouseEnter={() => {
+                setCursorType('sarada');
+                setCursorText("Open Sarada's surprise");
+              }}
+              onMouseLeave={() => {
+                setCursorType('default');
+                setCursorText(null);
+              }}
               className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-amber-700 via-amber-800 to-amber-900 hover:from-amber-800 hover:to-amber-950 text-white font-medium text-base shadow-lg shadow-amber-900/15 hover:shadow-xl hover:shadow-amber-900/25 transition-all flex items-center justify-center gap-2 group cursor-pointer"
             >
               <span>Open Your Surprise ✨</span>
-            </button>
+            </MagneticButton>
             <span className="text-xs text-slate-400 mt-2 font-light">
               Click to unfold a personalized tribute
             </span>
@@ -174,12 +185,20 @@ export const TeacherSelection = ({ onSelectTeacher }: TeacherSelectionProps) => 
 
           {/* Button CTA */}
           <div className="mt-8 pt-6 border-t border-[#F0E6D2] flex flex-col items-center">
-            <button
+            <MagneticButton
               onClick={() => onSelectTeacher('kranti')}
+              onMouseEnter={() => {
+                setCursorType('kranti');
+                setCursorText("Open Kranti's surprise");
+              }}
+              onMouseLeave={() => {
+                setCursorType('default');
+                setCursorText(null);
+              }}
               className="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-orange-600 via-amber-600 to-amber-700 hover:from-orange-700 hover:to-amber-800 text-white font-medium text-base shadow-lg shadow-orange-900/15 hover:shadow-xl hover:shadow-orange-900/25 transition-all flex items-center justify-center gap-2 group cursor-pointer"
             >
               <span>Open Your Surprise 🌻</span>
-            </button>
+            </MagneticButton>
             <span className="text-xs text-slate-400 mt-2 font-light">
               Click to unfold a personalized tribute
             </span>
