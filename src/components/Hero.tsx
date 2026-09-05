@@ -3,7 +3,6 @@ import { Sparkles, Heart, ChevronDown } from 'lucide-react';
 import { MINI_SURPRISES } from '../data/teachers';
 import type { MiniSurprise, TeacherId } from '../types';
 import { useCursor } from '../context/CursorContext';
-import { MagneticButton } from './MagneticButton';
 
 interface HeroProps {
   onTriggerSurprise: (surprise: MiniSurprise) => void;
@@ -14,7 +13,7 @@ export const Hero = ({ onTriggerSurprise, onSelectTeacher }: HeroProps) => {
   const { setCursorType, setCursorText } = useCursor();
 
   const scrollToNext = () => {
-    const el = document.getElementById('intro');
+    const el = document.getElementById('journey') || document.getElementById('intro');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -263,54 +262,14 @@ export const Hero = ({ onTriggerSurprise, onSelectTeacher }: HeroProps) => {
             ))}
           </div>
         </motion.div>
-
-        {/* Quick Teacher Choice CTAs with Magnetic Effect */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.9 }}
-          className="mt-8 flex flex-col sm:flex-row items-center gap-3 w-full max-w-md justify-center"
-        >
-          <MagneticButton
-            onClick={() => onSelectTeacher('sarada')}
-            onMouseEnter={() => {
-              setCursorType('sarada');
-              setCursorText("Open Sarada's surprise");
-            }}
-            onMouseLeave={() => {
-              setCursorType('default');
-              setCursorText(null);
-            }}
-            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-amber-700 via-amber-800 to-amber-900 text-white font-medium text-sm shadow-md hover:shadow-lg hover:from-amber-800 hover:to-amber-950 transition-all flex items-center justify-center gap-2 group cursor-pointer"
-          >
-            <span>Surprise for Sarada Madam</span>
-            <Sparkles className="w-4 h-4 text-amber-300 group-hover:rotate-12 transition-transform" />
-          </MagneticButton>
-
-          <MagneticButton
-            onClick={() => onSelectTeacher('kranti')}
-            onMouseEnter={() => {
-              setCursorType('kranti');
-              setCursorText("Open Kranti's surprise");
-            }}
-            onMouseLeave={() => {
-              setCursorType('default');
-              setCursorText(null);
-            }}
-            className="w-full sm:w-auto px-6 py-3 rounded-xl bg-gradient-to-r from-orange-600 via-amber-600 to-amber-700 text-white font-medium text-sm shadow-md hover:shadow-lg hover:from-orange-700 hover:to-amber-800 transition-all flex items-center justify-center gap-2 group cursor-pointer"
-          >
-            <span>Surprise for Kranti Madam</span>
-            <span className="text-base group-hover:scale-110 transition-transform">🌻</span>
-          </MagneticButton>
-        </motion.div>
       </div>
 
       {/* Smooth Scroll Indicator */}
       <motion.div
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
-        transition={{ duration: 1, delay: 1.1 }}
-        className="mt-14 sm:mt-16 flex flex-col items-center justify-center gap-2 text-slate-500 cursor-pointer group"
+        transition={{ duration: 1, delay: 0.95 }}
+        className="mt-12 sm:mt-14 flex flex-col items-center justify-center gap-2 text-slate-500 cursor-pointer group"
         onClick={scrollToNext}
       >
         <span className="text-xs uppercase tracking-widest font-semibold text-slate-400 group-hover:text-amber-800 transition-colors">
