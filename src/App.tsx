@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { Navbar } from './components/Navbar';
+import { Sidebar } from './components/Sidebar';
 import { Hero } from './components/Hero';
 import { AppreciationSection } from './components/AppreciationSection';
 import { TeacherSelection } from './components/TeacherSelection';
@@ -52,8 +52,8 @@ export function App() {
 
   return (
     <div className="relative min-h-screen flex flex-col justify-between selection:bg-amber-200 selection:text-amber-950 font-sans">
-      {/* Floating Navigation */}
-      <Navbar onSelectTeacher={handleSelectTeacher} />
+      {/* Vertical Floating Sidebar on Left & Mobile Drawer */}
+      <Sidebar onSelectTeacher={handleSelectTeacher} />
 
       {/* Main Page Flow */}
       <main className="flex-1 w-full">
