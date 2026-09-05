@@ -1,9 +1,12 @@
+export type TeacherId = 'sarada' | 'bhagawan' | 'kranti' | 'kishore' | 'radhakrishna';
+
 export interface TeacherInfo {
-  id: 'sarada' | 'kranti';
+  id: TeacherId;
   name: string;
   honorificTitle: string;
   roleBadge: string;
   departmentTitle: string;
+  headline: string;
   quoteSnippet: string;
   cardTheme: {
     accentColor: string;
@@ -31,4 +34,15 @@ export interface MiniSurprise {
   label: string;
   message: string;
   subtext: string;
+}
+
+export interface JourneyStage {
+  id: string;
+  icon: string;
+  title: string;
+  tagline: string;
+  mentorName: string;
+  mentorId: TeacherId;
+  mentorRole: string;
+  color: string;
 }

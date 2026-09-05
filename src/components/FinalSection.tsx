@@ -88,60 +88,153 @@ export const FinalSection = () => {
                 <Heart className="w-8 h-8 fill-rose-500 text-rose-500 animate-pulse" />
               </div>
 
-              {/* Thank You Title */}
+              {/* Behind Every Student Title */}
               <div>
+                <motion.span
+                  initial={{ opacity: 0, y: -6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  className="text-xs font-bold uppercase tracking-widest text-amber-700 bg-amber-100/70 border border-amber-300 px-3.5 py-1 rounded-full"
+                >
+                  Department Tribute
+                </motion.span>
                 <motion.h2
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.1 }}
-                  className="text-3xl sm:text-5xl md:text-6xl font-display font-bold text-slate-900 tracking-tight"
+                  className="mt-4 text-3xl sm:text-5xl md:text-6xl font-display font-bold text-slate-900 tracking-tight"
                 >
-                  Thank You, Teachers. <span className="text-rose-600">❤️</span>
+                  BEHIND EVERY STUDENT
                 </motion.h2>
               </div>
 
-              {/* Gratitude Lines */}
-              <div className="space-y-3 max-w-lg mx-auto text-base sm:text-xl font-medium text-slate-700 leading-relaxed font-serif italic">
+              {/* Sequential Gratitude Reveal Lines */}
+              <div className="space-y-3.5 max-w-lg mx-auto text-base sm:text-xl font-medium text-slate-700 leading-relaxed font-serif italic py-2">
                 <motion.p
-                  initial={{ opacity: 0, x: -10 }}
+                  initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.3 }}
+                  transition={{ delay: 0.3, duration: 0.5 }}
                 >
-                  "Thank you for your patience."
+                  "Someone taught us. 📚"
                 </motion.p>
                 <motion.p
-                  initial={{ opacity: 0, x: 10 }}
+                  initial={{ opacity: 0, x: 16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.5 }}
+                  transition={{ delay: 0.6, duration: 0.5 }}
                 >
-                  "Thank you for your guidance."
+                  "Someone guided us. 🧭"
                 </motion.p>
                 <motion.p
-                  initial={{ opacity: 0, x: -10 }}
+                  initial={{ opacity: 0, x: -16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.7 }}
+                  transition={{ delay: 0.9, duration: 0.5 }}
                 >
-                  "Thank you for believing in us."
+                  "Someone encouraged us. 🚀"
                 </motion.p>
                 <motion.p
-                  initial={{ opacity: 0, x: 10 }}
+                  initial={{ opacity: 0, x: 16 }}
                   animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.9 }}
+                  transition={{ delay: 1.2, duration: 0.5 }}
                 >
-                  "Thank you for being part of our journey."
+                  "Someone corrected us. 🛡️"
+                </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, x: -16 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 1.5, duration: 0.5 }}
+                >
+                  "Someone believed in us. ❤️"
+                </motion.p>
+                <motion.p
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 1.8, duration: 0.6 }}
+                  className="text-lg sm:text-2xl font-display not-italic font-semibold text-slate-900 pt-2"
+                >
+                  "Together, they helped shape us."
                 </motion.p>
               </div>
 
-              {/* Final Climax Line */}
+              {/* 5 Icons Merging / Orbiting toward Heart */}
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 2.1, duration: 0.6 }}
+                className="py-4 flex flex-col items-center"
+              >
+                <div className="flex items-center justify-center gap-3 sm:gap-4 p-3 rounded-2xl bg-amber-50/70 border border-amber-200/80 shadow-inner">
+                  <motion.span
+                    animate={{ y: [0, -4, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0 }}
+                    className="text-2xl sm:text-3xl"
+                    title="Sarada Madam - Leadership"
+                  >
+                    🌷
+                  </motion.span>
+                  <motion.span
+                    animate={{ y: [0, -4, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0.2 }}
+                    className="text-2xl sm:text-3xl"
+                    title="Bhagawan Sir - Career Path"
+                  >
+                    🧭
+                  </motion.span>
+                  <motion.span
+                    animate={{ scale: [1, 1.2, 1] }}
+                    transition={{ duration: 1.6, repeat: Infinity }}
+                    className="text-2xl sm:text-3xl"
+                    title="All 5 Mentors in One Heart"
+                  >
+                    ❤️
+                  </motion.span>
+                  <motion.span
+                    animate={{ y: [0, -4, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
+                    className="text-2xl sm:text-3xl"
+                    title="Kranti Madam - Support & Mentorship"
+                  >
+                    🌻
+                  </motion.span>
+                  <motion.span
+                    animate={{ y: [0, -4, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0.6 }}
+                    className="text-2xl sm:text-3xl"
+                    title="Kishore Sir - Innovation & Hackathons"
+                  >
+                    💡
+                  </motion.span>
+                  <motion.span
+                    animate={{ y: [0, -4, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 0.8 }}
+                    className="text-2xl sm:text-3xl"
+                    title="Radha Krishna Sir - Discipline & Integrity"
+                  >
+                    🛡️
+                  </motion.span>
+                </div>
+                <p className="mt-3 text-xs sm:text-sm font-medium text-slate-500 italic">
+                  "Different roles. Different lessons. One unforgettable journey."
+                </p>
+              </motion.div>
+
+              {/* Climax and 5 Mentor Names */}
               <motion.div
                 initial={{ opacity: 0, scale: 0.9 }}
                 animate={{ opacity: 1, scale: 1 }}
-                transition={{ delay: 1.1 }}
-                className="pt-6 border-t border-slate-100"
+                transition={{ delay: 2.4 }}
+                className="pt-6 border-t border-slate-100 space-y-4"
               >
-                <div className="inline-block px-6 py-3 rounded-2xl bg-gradient-to-r from-amber-50 via-rose-50 to-amber-50 border border-amber-200">
-                  <p className="text-lg sm:text-2xl font-display font-semibold text-rose-800">
-                    Happy Teachers' Day, Sarada Madam &amp; Kranti Madam! 🌷
+                <div>
+                  <h3 className="text-2xl sm:text-4xl font-display font-bold text-rose-800 tracking-tight">
+                    THANK YOU, AIML FACULTY ❤️
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm md:text-base font-semibold text-slate-700 tracking-wide">
+                    Sarada Madam &bull; Bhagawan Sir &bull; Kranti Madam &bull; Kishore Sir &bull; Radha Krishna Sir
+                  </p>
+                </div>
+
+                <div className="inline-block px-6 py-2.5 rounded-2xl bg-gradient-to-r from-amber-100/90 via-rose-100/90 to-amber-100/90 border border-amber-300 shadow-xs">
+                  <p className="text-base sm:text-xl font-display font-bold text-slate-900">
+                    HAPPY TEACHERS' DAY 🌷
                   </p>
                 </div>
               </motion.div>

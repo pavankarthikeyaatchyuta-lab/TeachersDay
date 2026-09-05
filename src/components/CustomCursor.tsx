@@ -71,9 +71,21 @@ export const CustomCursor = () => {
           char = Math.random() > 0.6 ? '🌸' : '✧';
           color = '#FB7185';
           size = 11;
+        } else if (cursorType === 'bhagawan' || cursorType === 'bhagawan-modal') {
+          char = Math.random() > 0.6 ? '🧭' : '✨';
+          color = '#0284C7';
+          size = 12;
         } else if (cursorType === 'kranti' || cursorType === 'kranti-modal') {
           char = Math.random() > 0.6 ? '🌻' : '·';
           color = '#F59E0B';
+          size = 12;
+        } else if (cursorType === 'kishore' || cursorType === 'kishore-modal') {
+          char = Math.random() > 0.6 ? '💡' : '🔥';
+          color = '#EA580C';
+          size = 12;
+        } else if (cursorType === 'radhakrishna' || cursorType === 'radhakrishna-modal') {
+          char = Math.random() > 0.6 ? '🛡️' : '⭐';
+          color = '#3B82F6';
           size = 12;
         } else if (cursorType === 'heart') {
           char = '♥';
@@ -270,6 +282,16 @@ export const CustomCursor = () => {
           </div>
         )}
 
+        {effectiveType === 'bhagawan' && (
+          <div className="flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-full border border-sky-300 shadow-lg">
+            <span className="text-xs">🧭</span>
+            <span className="text-[11px] font-semibold text-sky-950 whitespace-nowrap">
+              {cursorText || "Open Bhagawan Sir's guidance"}
+            </span>
+            <span className="text-sky-500 text-[10px]">🚀</span>
+          </div>
+        )}
+
         {effectiveType === 'kranti' && (
           <div className="flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-full border border-amber-300 shadow-lg">
             <span className="text-xs">🌻</span>
@@ -280,6 +302,26 @@ export const CustomCursor = () => {
           </div>
         )}
 
+        {effectiveType === 'kishore' && (
+          <div className="flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-full border border-orange-300 shadow-lg">
+            <span className="text-xs">💡</span>
+            <span className="text-[11px] font-semibold text-orange-950 whitespace-nowrap">
+              {cursorText || "Open Kishore Sir's innovation"}
+            </span>
+            <span className="text-orange-600 text-[10px]">🔥</span>
+          </div>
+        )}
+
+        {effectiveType === 'radhakrishna' && (
+          <div className="flex items-center gap-1.5 bg-white/95 backdrop-blur-xs px-2.5 py-1 rounded-full border border-indigo-300 shadow-lg">
+            <span className="text-xs">🛡️</span>
+            <span className="text-[11px] font-semibold text-slate-900 whitespace-nowrap">
+              {cursorText || "Open Radha Krishna Sir's lesson"}
+            </span>
+            <span className="text-indigo-600 text-[10px]">⭐</span>
+          </div>
+        )}
+
         {effectiveType === 'sarada-modal' && (
           <div className="flex items-center gap-1 bg-rose-50/90 backdrop-blur-xs px-2 py-1 rounded-full border border-rose-300 shadow-md">
             <span className="text-xs">🌷</span>
@@ -287,10 +329,31 @@ export const CustomCursor = () => {
           </div>
         )}
 
+        {effectiveType === 'bhagawan-modal' && (
+          <div className="flex items-center gap-1 bg-sky-50/90 backdrop-blur-xs px-2 py-1 rounded-full border border-sky-300 shadow-md">
+            <span className="text-xs">🧭</span>
+            <span className="text-sky-600 text-[10px]">🚀</span>
+          </div>
+        )}
+
         {effectiveType === 'kranti-modal' && (
           <div className="flex items-center gap-1 bg-orange-50/90 backdrop-blur-xs px-2 py-1 rounded-full border border-orange-300 shadow-md">
             <span className="text-xs">🌻</span>
             <span className="text-amber-600 text-[10px]">✨</span>
+          </div>
+        )}
+
+        {effectiveType === 'kishore-modal' && (
+          <div className="flex items-center gap-1 bg-orange-50/90 backdrop-blur-xs px-2 py-1 rounded-full border border-orange-300 shadow-md">
+            <span className="text-xs">💡</span>
+            <span className="text-orange-600 text-[10px]">💻</span>
+          </div>
+        )}
+
+        {effectiveType === 'radhakrishna-modal' && (
+          <div className="flex items-center gap-1 bg-indigo-50/90 backdrop-blur-xs px-2 py-1 rounded-full border border-indigo-300 shadow-md">
+            <span className="text-xs">🛡️</span>
+            <span className="text-indigo-600 text-[10px]">⭐</span>
           </div>
         )}
 
@@ -306,6 +369,12 @@ export const CustomCursor = () => {
           <div className="flex items-center gap-1 bg-white/90 px-2 py-1 rounded-full border border-amber-300 shadow-sm">
             <span className="text-xs text-amber-800">✦</span>
             <span className="text-[10px] font-medium text-slate-700">Home</span>
+          </div>
+        )}
+        {effectiveType === 'sidebar-journey' && (
+          <div className="flex items-center gap-1 bg-white/90 px-2 py-1 rounded-full border border-indigo-300 shadow-sm">
+            <span className="text-xs">🚀</span>
+            <span className="text-[10px] font-medium text-slate-700">AIML Journey</span>
           </div>
         )}
         {effectiveType === 'sidebar-appreciation' && (

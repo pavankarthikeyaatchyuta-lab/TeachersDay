@@ -1,13 +1,13 @@
 import { motion } from 'framer-motion';
 import { Sparkles, Heart, ChevronDown } from 'lucide-react';
 import { MINI_SURPRISES } from '../data/teachers';
-import type { MiniSurprise } from '../types';
+import type { MiniSurprise, TeacherId } from '../types';
 import { useCursor } from '../context/CursorContext';
 import { MagneticButton } from './MagneticButton';
 
 interface HeroProps {
   onTriggerSurprise: (surprise: MiniSurprise) => void;
-  onSelectTeacher: (id: 'sarada' | 'kranti') => void;
+  onSelectTeacher: (id: TeacherId) => void;
 }
 
 export const Hero = ({ onTriggerSurprise, onSelectTeacher }: HeroProps) => {
@@ -146,26 +146,88 @@ export const Hero = ({ onTriggerSurprise, onSelectTeacher }: HeroProps) => {
           <div className="h-px w-8 sm:w-16 bg-gradient-to-l from-transparent to-amber-300" />
         </motion.div>
 
-        {/* Dedicated to Sarada Madam & Kranti Madam pill */}
+        {/* Dedicated to our 5 AIML Department Mentors */}
         <motion.div
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, delay: 0.6 }}
-          className="mt-4 flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm text-slate-600"
+          className="mt-5 flex flex-wrap items-center justify-center gap-2 text-xs sm:text-sm text-slate-600 max-w-2xl mx-auto"
         >
-          <span>Dedicated with love &amp; respect to:</span>
+          <span>Dedicated with love &amp; respect to our AIML Mentors:</span>
           <button 
             onClick={() => onSelectTeacher('sarada')}
-            className="inline-flex items-center gap-1 font-semibold text-amber-900 hover:text-amber-700 underline decoration-amber-300 decoration-2 underline-offset-4 transition-colors"
+            onMouseEnter={() => {
+              setCursorType('sarada');
+              setCursorText("Sarada Madam (HoD)");
+            }}
+            onMouseLeave={() => {
+              setCursorType('default');
+              setCursorText(null);
+            }}
+            className="inline-flex items-center gap-1 font-semibold text-amber-900 hover:text-amber-700 bg-amber-50/80 px-2.5 py-0.5 rounded-full border border-amber-200 transition-colors cursor-pointer"
           >
-            Sarada Madam (HoD)
+            <span>🌷</span>
+            <span>Sarada Madam</span>
           </button>
-          <span>and</span>
+          <button 
+            onClick={() => onSelectTeacher('bhagawan')}
+            onMouseEnter={() => {
+              setCursorType('bhagawan');
+              setCursorText("Bhagawan Sir (Training)");
+            }}
+            onMouseLeave={() => {
+              setCursorType('default');
+              setCursorText(null);
+            }}
+            className="inline-flex items-center gap-1 font-semibold text-sky-900 hover:text-sky-700 bg-sky-50/80 px-2.5 py-0.5 rounded-full border border-sky-200 transition-colors cursor-pointer"
+          >
+            <span>🧭</span>
+            <span>Bhagawan Sir</span>
+          </button>
           <button 
             onClick={() => onSelectTeacher('kranti')}
-            className="inline-flex items-center gap-1 font-semibold text-orange-900 hover:text-orange-700 underline decoration-orange-300 decoration-2 underline-offset-4 transition-colors"
+            onMouseEnter={() => {
+              setCursorType('kranti');
+              setCursorText("Kranti Madam (Mentor)");
+            }}
+            onMouseLeave={() => {
+              setCursorType('default');
+              setCursorText(null);
+            }}
+            className="inline-flex items-center gap-1 font-semibold text-orange-900 hover:text-orange-700 bg-orange-50/80 px-2.5 py-0.5 rounded-full border border-orange-200 transition-colors cursor-pointer"
           >
-            Kranti Madam
+            <span>🌻</span>
+            <span>Kranti Madam</span>
+          </button>
+          <button 
+            onClick={() => onSelectTeacher('kishore')}
+            onMouseEnter={() => {
+              setCursorType('kishore');
+              setCursorText("Kishore Sir (Innovation)");
+            }}
+            onMouseLeave={() => {
+              setCursorType('default');
+              setCursorText(null);
+            }}
+            className="inline-flex items-center gap-1 font-semibold text-rose-900 hover:text-rose-700 bg-rose-50/80 px-2.5 py-0.5 rounded-full border border-rose-200 transition-colors cursor-pointer"
+          >
+            <span>💡</span>
+            <span>Kishore Sir</span>
+          </button>
+          <button 
+            onClick={() => onSelectTeacher('radhakrishna')}
+            onMouseEnter={() => {
+              setCursorType('radhakrishna');
+              setCursorText("Radha Krishna Sir (Discipline)");
+            }}
+            onMouseLeave={() => {
+              setCursorType('default');
+              setCursorText(null);
+            }}
+            className="inline-flex items-center gap-1 font-semibold text-indigo-900 hover:text-indigo-700 bg-indigo-50/80 px-2.5 py-0.5 rounded-full border border-indigo-200 transition-colors cursor-pointer"
+          >
+            <span>🛡️</span>
+            <span>Radha Krishna Sir</span>
           </button>
         </motion.div>
 

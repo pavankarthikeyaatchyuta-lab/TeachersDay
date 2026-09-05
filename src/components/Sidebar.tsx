@@ -7,28 +7,82 @@ import {
   Mail, 
   Heart, 
   Menu, 
-  X
+  X,
+  Rocket
 } from 'lucide-react';
 import { useCursor } from '../context/CursorContext';
+import type { TeacherId } from '../types';
 
 interface SidebarProps {
-  onSelectTeacher: (id: 'sarada' | 'kranti') => void;
+  onSelectTeacher: (id: TeacherId) => void;
 }
 
 interface NavItem {
   id: string;
   label: string;
   icon: typeof Home;
-  emoji?: string;
-  isSection: boolean;
+  emoji: string;
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { id: 'hero', label: 'Home', icon: Home, emoji: '⌂', isSection: true },
-  { id: 'intro', label: 'Appreciation', icon: Sparkles, emoji: '✦', isSection: true },
-  { id: 'teachers', label: 'Our Teachers', icon: GraduationCap, emoji: '👩‍🏫', isSection: true },
-  { id: 'quote', label: 'Message', icon: Mail, emoji: '💌', isSection: true },
-  { id: 'final-tribute', label: 'Thank You', icon: Heart, emoji: '♥', isSection: true },
+  { id: 'hero', label: 'Home', icon: Home, emoji: '❤️' },
+  { id: 'journey', label: 'AIML Journey', icon: Rocket, emoji: '🚀' },
+  { id: 'intro', label: 'Appreciation', icon: Sparkles, emoji: '✦' },
+  { id: 'faculty', label: 'Our Mentors', icon: GraduationCap, emoji: '👩‍🏫' },
+  { id: 'quote', label: 'Message', icon: Mail, emoji: '💌' },
+  { id: 'final-tribute', label: 'Thank You', icon: Heart, emoji: '♥' },
+];
+
+interface MentorItem {
+  id: TeacherId;
+  name: string;
+  role: string;
+  emoji: string;
+  accentBg: string;
+  accentBorder: string;
+}
+
+const MENTOR_ITEMS: MentorItem[] = [
+  {
+    id: 'sarada',
+    name: 'Sarada Madam',
+    role: 'Our HoD • Leadership',
+    emoji: '🌷',
+    accentBg: 'bg-amber-100/90',
+    accentBorder: 'border-amber-200',
+  },
+  {
+    id: 'bhagawan',
+    name: 'Bhagawan Sir',
+    role: 'Training & Placements',
+    emoji: '🧭',
+    accentBg: 'bg-sky-100/90',
+    accentBorder: 'border-sky-200',
+  },
+  {
+    id: 'kranti',
+    name: 'Kranti Madam',
+    role: 'Teacher & Mentor',
+    emoji: '🌻',
+    accentBg: 'bg-yellow-100/90',
+    accentBorder: 'border-yellow-200',
+  },
+  {
+    id: 'kishore',
+    name: 'Kishore Sir',
+    role: 'Innovation & Projects',
+    emoji: '💡',
+    accentBg: 'bg-orange-100/90',
+    accentBorder: 'border-orange-200',
+  },
+  {
+    id: 'radhakrishna',
+    name: 'Radha Krishna Sir',
+    role: 'Discipline & Values',
+    emoji: '🛡️',
+    accentBg: 'bg-indigo-100/90',
+    accentBorder: 'border-indigo-200',
+  },
 ];
 
 export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
@@ -40,7 +94,7 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
 
   // Scroll spy to update active section
   useEffect(() => {
-    const sectionIds = ['hero', 'intro', 'teachers', 'quote', 'final-tribute'];
+    const sectionIds = ['hero', 'journey', 'intro', 'faculty', 'quote', 'final-tribute'];
 
     const handleScroll = () => {
       const scrollPosition = window.scrollY + window.innerHeight * 0.35;
@@ -88,7 +142,7 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
     }
   };
 
-  const handleTeacherClick = (id: 'sarada' | 'kranti') => {
+  const handleTeacherClick = (id: TeacherId) => {
     setMobileDrawerOpen(false);
     onSelectTeacher(id);
   };
@@ -109,16 +163,16 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
         className="hidden md:flex fixed left-6 top-1/2 -translate-y-1/2 z-50 pointer-events-auto"
       >
         <motion.div
-          animate={{ width: isExpanded ? 240 : 66 }}
+          animate={{ width: isExpanded ? 248 : 66 }}
           transition={{ type: 'spring', damping: 25, stiffness: 280 }}
-          className="relative bg-[#FAF7F2]/90 backdrop-blur-2xl border border-[#EADBCA]/95 shadow-2xl shadow-amber-950/10 rounded-[32px] p-2.5 flex flex-col items-stretch overflow-visible transition-shadow hover:shadow-amber-900/15"
+          className="relative bg-[#FAF7F2]/90 backdrop-blur-2xl border border-[#EADBCA]/95 shadow-2xl shadow-amber-950/10 rounded-[32px] p-2.5 flex flex-col items-stretch overflow-visible transition-shadow hover:shadow-amber-900/15 max-h-[92vh] overflow-y-auto no-scrollbar"
         >
           {/* Top Brand / Teachers' Day Header */}
           <button
             onClick={() => scrollToSection('hero')}
             onMouseEnter={() => setCursorType('sidebar-home')}
             onMouseLeave={() => setCursorType('default')}
-            className="flex items-center gap-3 p-1.5 rounded-2xl hover:bg-amber-50/80 transition-colors text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 overflow-hidden cursor-pointer"
+            className="flex items-center gap-3 p-1.5 rounded-2xl hover:bg-amber-50/80 transition-colors text-left group focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 overflow-hidden cursor-pointer shrink-0"
           >
             <div className="w-10 h-10 rounded-2xl bg-gradient-to-tr from-amber-200 via-rose-100 to-rose-200 flex items-center justify-center text-rose-600 shrink-0 shadow-xs group-hover:scale-105 transition-transform">
               <Heart className="w-5 h-5 fill-rose-500 text-rose-500 animate-pulse" />
@@ -134,10 +188,10 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
                   className="whitespace-nowrap overflow-hidden pr-2"
                 >
                   <span className="font-serif font-bold text-sm text-slate-800 block tracking-tight">
-                    Teachers' Day
+                    AIML Department
                   </span>
                   <span className="text-[11px] text-amber-900/70 font-medium block">
-                    Sarada &amp; Kranti
+                    Teachers' Day 2026
                   </span>
                 </motion.div>
               )}
@@ -145,10 +199,10 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
           </button>
 
           {/* Section Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-amber-200 to-transparent my-2 mx-2" />
+          <div className="h-px bg-gradient-to-r from-transparent via-amber-200 to-transparent my-1.5 mx-2" />
 
           {/* Navigation Links */}
-          <nav className="flex flex-col gap-1.5" aria-label="Page Sections">
+          <nav className="flex flex-col gap-1" aria-label="Page Sections">
             {NAV_ITEMS.map((item) => {
               const isActive = activeSection === item.id;
               const Icon = item.icon;
@@ -160,8 +214,9 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
                   onMouseEnter={() => {
                     setHoveredItem(item.id);
                     if (item.id === 'hero') setCursorType('sidebar-home');
+                    else if (item.id === 'journey') setCursorType('sidebar-journey');
                     else if (item.id === 'intro') setCursorType('sidebar-appreciation');
-                    else if (item.id === 'teachers') setCursorType('sidebar-teachers');
+                    else if (item.id === 'faculty') setCursorType('sidebar-teachers');
                     else if (item.id === 'quote') setCursorType('sidebar-message');
                     else if (item.id === 'final-tribute') setCursorType('sidebar-thanks');
                   }}
@@ -217,119 +272,65 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
           </nav>
 
           {/* Teacher Surprises Divider */}
-          <div className="h-px bg-gradient-to-r from-transparent via-amber-200 to-transparent my-2 mx-2" />
+          <div className="h-px bg-gradient-to-r from-transparent via-amber-200 to-transparent my-1.5 mx-2" />
 
-          {/* Teacher Direct Surprise Triggers */}
-          <div className="flex flex-col gap-1.5" aria-label="Teacher Surprises">
-            {/* Sarada Madam Button */}
-            <div 
-              className="relative flex items-center"
-              onMouseEnter={() => {
-                setHoveredItem('sarada');
-                setCursorType('sarada');
-              }}
-              onMouseLeave={() => {
-                setHoveredItem(null);
-                setCursorType('default');
-              }}
-            >
-              <button
-                onClick={() => handleTeacherClick('sarada')}
-                className="w-full flex items-center gap-3 p-2 rounded-2xl text-amber-900 hover:bg-amber-100/70 border border-transparent hover:border-amber-200/80 transition-all text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 overflow-hidden group cursor-pointer"
+          {/* 5 Mentors Direct Surprise Triggers */}
+          <div className="flex flex-col gap-1" aria-label="Teacher Surprises">
+            {MENTOR_ITEMS.map((mentor) => (
+              <div 
+                key={mentor.id}
+                className="relative flex items-center"
+                onMouseEnter={() => {
+                  setHoveredItem(mentor.id);
+                  setCursorType(mentor.id);
+                }}
+                onMouseLeave={() => {
+                  setHoveredItem(null);
+                  setCursorType('default');
+                }}
               >
-                <div className="w-8 h-8 rounded-xl bg-amber-100/90 border border-amber-200 flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-110 transition-transform">
-                  <span className="text-sm">🌷</span>
-                </div>
-
-                <AnimatePresence>
-                  {isExpanded && (
-                    <motion.div
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -8 }}
-                      transition={{ duration: 0.2 }}
-                      className="whitespace-nowrap overflow-hidden flex flex-col pr-1"
-                    >
-                      <span className="text-xs font-semibold text-amber-950 flex items-center gap-1">
-                        Sarada Madam
-                        <Sparkles className="w-3 h-3 text-amber-600" />
-                      </span>
-                      <span className="text-[10px] text-amber-800/70 font-medium">
-                        Our HoD • Surprise
-                      </span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </button>
-
-              {!isExpanded && hoveredItem === 'sarada' && (
-                <motion.div
-                  initial={{ opacity: 0, x: -4, scale: 0.95 }}
-                  animate={{ opacity: 1, x: 8, scale: 1 }}
-                  exit={{ opacity: 0, x: -4, scale: 0.95 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute left-full ml-2 px-3 py-1.5 rounded-xl bg-slate-900/95 backdrop-blur-md text-white text-xs font-medium whitespace-nowrap shadow-xl border border-white/10 pointer-events-none z-50 flex items-center gap-1.5"
+                <button
+                  onClick={() => handleTeacherClick(mentor.id)}
+                  className="w-full flex items-center gap-3 p-1.5 rounded-2xl text-slate-800 hover:bg-white/80 border border-transparent hover:border-amber-200/80 transition-all text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 overflow-hidden group cursor-pointer"
                 >
-                  <span>🌷</span>
-                  <span>Sarada Madam (HoD)</span>
-                </motion.div>
-              )}
-            </div>
+                  <div className={`w-8 h-8 rounded-xl ${mentor.accentBg} border ${mentor.accentBorder} flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-110 transition-transform`}>
+                    <span className="text-sm">{mentor.emoji}</span>
+                  </div>
 
-            {/* Kranti Madam Button */}
-            <div 
-              className="relative flex items-center"
-              onMouseEnter={() => {
-                setHoveredItem('kranti');
-                setCursorType('kranti');
-              }}
-              onMouseLeave={() => {
-                setHoveredItem(null);
-                setCursorType('default');
-              }}
-            >
-              <button
-                onClick={() => handleTeacherClick('kranti')}
-                className="w-full flex items-center gap-3 p-2 rounded-2xl text-orange-900 hover:bg-orange-100/70 border border-transparent hover:border-orange-200/80 transition-all text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-orange-500 overflow-hidden group cursor-pointer"
-              >
-                <div className="w-8 h-8 rounded-xl bg-orange-100/90 border border-orange-200 flex items-center justify-center shrink-0 shadow-2xs group-hover:scale-110 transition-transform">
-                  <span className="text-sm">🌻</span>
-                </div>
+                  <AnimatePresence>
+                    {isExpanded && (
+                      <motion.div
+                        initial={{ opacity: 0, x: -8 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -8 }}
+                        transition={{ duration: 0.2 }}
+                        className="whitespace-nowrap overflow-hidden flex flex-col pr-1"
+                      >
+                        <span className="text-xs font-semibold text-slate-900 flex items-center gap-1">
+                          {mentor.name}
+                        </span>
+                        <span className="text-[10px] text-slate-500 font-medium leading-none mt-0.5">
+                          {mentor.role}
+                        </span>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </button>
 
-                <AnimatePresence>
-                  {isExpanded && (
-                    <motion.div
-                      initial={{ opacity: 0, x: -8 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -8 }}
-                      transition={{ duration: 0.2 }}
-                      className="whitespace-nowrap overflow-hidden flex flex-col pr-1"
-                    >
-                      <span className="text-xs font-semibold text-orange-950 flex items-center gap-1">
-                        Kranti Madam
-                        <span className="text-xs">✨</span>
-                      </span>
-                      <span className="text-[10px] text-orange-800/70 font-medium">
-                        Respected Teacher
-                      </span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </button>
-
-              {!isExpanded && hoveredItem === 'kranti' && (
-                <motion.div
-                  initial={{ opacity: 0, x: -4, scale: 0.95 }}
-                  animate={{ opacity: 1, x: 8, scale: 1 }}
-                  exit={{ opacity: 0, x: -4, scale: 0.95 }}
-                  transition={{ duration: 0.15 }}
-                  className="absolute left-full ml-2 px-3 py-1.5 rounded-xl bg-slate-900/95 backdrop-blur-md text-white text-xs font-medium whitespace-nowrap shadow-xl border border-white/10 pointer-events-none z-50 flex items-center gap-1.5"
-                >
-                  <span>🌻</span>
-                  <span>Kranti Madam</span>
-                </motion.div>
-              )}
-            </div>
+                {!isExpanded && hoveredItem === mentor.id && (
+                  <motion.div
+                    initial={{ opacity: 0, x: -4, scale: 0.95 }}
+                    animate={{ opacity: 1, x: 8, scale: 1 }}
+                    exit={{ opacity: 0, x: -4, scale: 0.95 }}
+                    transition={{ duration: 0.15 }}
+                    className="absolute left-full ml-2 px-3 py-1.5 rounded-xl bg-slate-900/95 backdrop-blur-md text-white text-xs font-medium whitespace-nowrap shadow-xl border border-white/10 pointer-events-none z-50 flex items-center gap-1.5"
+                  >
+                    <span>{mentor.emoji}</span>
+                    <span>{mentor.name}</span>
+                  </motion.div>
+                )}
+              </div>
+            ))}
           </div>
         </motion.div>
       </aside>
@@ -342,7 +343,7 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
         <button
           onClick={() => setMobileDrawerOpen(true)}
           aria-label="Open Navigation Menu"
-          className="fixed top-5 left-5 z-40 w-11 h-11 rounded-full bg-[#FAF7F2]/90 backdrop-blur-xl border border-[#EADBCA] shadow-lg shadow-amber-950/10 flex items-center justify-center text-slate-700 hover:text-amber-900 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+          className="fixed top-5 left-5 z-40 w-11 h-11 rounded-full bg-[#FAF7F2]/90 backdrop-blur-xl border border-[#EADBCA] shadow-lg shadow-amber-950/10 flex items-center justify-center text-slate-700 hover:text-amber-900 active:scale-95 transition-all focus:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 cursor-pointer"
         >
           <Menu className="w-5 h-5" />
         </button>
@@ -367,7 +368,7 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
                 animate={{ x: 0 }}
                 exit={{ x: '-100%' }}
                 transition={{ type: 'spring', damping: 26, stiffness: 280 }}
-                className="relative w-72 max-w-[85vw] h-full bg-[#FAF7F2] border-r border-[#EADBCA] shadow-2xl p-6 flex flex-col justify-between overflow-y-auto"
+                className="relative w-80 max-w-[88vw] h-full bg-[#FAF7F2] border-r border-[#EADBCA] shadow-2xl p-6 flex flex-col justify-between overflow-y-auto"
               >
                 <div>
                   {/* Top Bar with Brand & Close Button */}
@@ -378,10 +379,10 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
                       </div>
                       <div>
                         <span className="font-serif font-bold text-sm text-slate-800 block">
-                          Teachers' Day
+                          AIML Department
                         </span>
                         <span className="text-[11px] text-amber-900/70 font-medium">
-                          Sarada &amp; Kranti
+                          Our Mentors &amp; Faculty
                         </span>
                       </div>
                     </div>
@@ -396,7 +397,7 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
                   </div>
 
                   {/* Navigation Links */}
-                  <nav className="mt-6 flex flex-col gap-1.5">
+                  <nav className="mt-5 flex flex-col gap-1">
                     {NAV_ITEMS.map((item) => {
                       const isActive = activeSection === item.id;
                       const Icon = item.icon;
@@ -405,7 +406,7 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
                         <button
                           key={item.id}
                           onClick={() => scrollToSection(item.id)}
-                          className={`flex items-center gap-3 px-3 py-2.5 rounded-2xl text-left text-sm font-medium transition-colors ${
+                          className={`flex items-center gap-3 px-3 py-2 rounded-2xl text-left text-sm font-medium transition-colors ${
                             isActive
                               ? 'bg-amber-100/90 text-amber-950 font-semibold border border-amber-200/80 shadow-xs'
                               : 'text-slate-600 hover:bg-amber-50/70 hover:text-slate-900'
@@ -419,50 +420,38 @@ export const Sidebar = ({ onSelectTeacher }: SidebarProps) => {
                   </nav>
 
                   {/* Divider */}
-                  <div className="h-px bg-gradient-to-r from-transparent via-amber-200 to-transparent my-6" />
+                  <div className="h-px bg-gradient-to-r from-transparent via-amber-200 to-transparent my-4" />
 
-                  {/* Teacher Surprise Buttons */}
-                  <div className="flex flex-col gap-2">
-                    <span className="text-[11px] font-semibold uppercase tracking-widest text-slate-400 px-3">
-                      Special Surprises
+                  {/* 5 Teacher Surprise Buttons */}
+                  <div className="flex flex-col gap-1.5">
+                    <span className="text-[10px] font-semibold uppercase tracking-widest text-slate-400 px-3">
+                      Our 5 Mentors
                     </span>
 
-                    <button
-                      onClick={() => handleTeacherClick('sarada')}
-                      className="flex items-center gap-3 px-3 py-2.5 rounded-2xl bg-amber-50/90 border border-amber-200/80 text-left hover:bg-amber-100 transition-colors cursor-pointer"
-                    >
-                      <span className="text-base">🌷</span>
-                      <div>
-                        <span className="text-xs font-semibold text-amber-950 block">
-                          Sarada Madam (HoD)
-                        </span>
-                        <span className="text-[10px] text-amber-800/70">
-                          Open your surprise ✨
-                        </span>
-                      </div>
-                    </button>
-
-                    <button
-                      onClick={() => handleTeacherClick('kranti')}
-                      className="flex items-center gap-3 px-3 py-2.5 rounded-2xl bg-orange-50/90 border border-orange-200/80 text-left hover:bg-orange-100 transition-colors cursor-pointer"
-                    >
-                      <span className="text-base">🌻</span>
-                      <div>
-                        <span className="text-xs font-semibold text-orange-950 block">
-                          Kranti Madam
-                        </span>
-                        <span className="text-[10px] text-orange-800/70">
-                          Open your surprise 💫
-                        </span>
-                      </div>
-                    </button>
+                    {MENTOR_ITEMS.map((m) => (
+                      <button
+                        key={m.id}
+                        onClick={() => handleTeacherClick(m.id)}
+                        className="flex items-center gap-3 px-3 py-2 rounded-2xl bg-white/80 border border-[#EADBCA] text-left hover:bg-amber-50 transition-colors cursor-pointer"
+                      >
+                        <span className="text-base">{m.emoji}</span>
+                        <div>
+                          <span className="text-xs font-semibold text-slate-900 block">
+                            {m.name}
+                          </span>
+                          <span className="text-[10px] text-slate-500">
+                            {m.role}
+                          </span>
+                        </div>
+                      </button>
+                    ))}
                   </div>
                 </div>
 
                 {/* Footer in Drawer */}
-                <div className="pt-4 border-t border-[#EADBCA] text-center">
+                <div className="pt-4 mt-6 border-t border-[#EADBCA] text-center">
                   <p className="text-[11px] text-slate-500">
-                    With love &amp; gratitude ❤️
+                    To all our AIML mentors — thank you ❤️
                   </p>
                 </div>
               </motion.div>

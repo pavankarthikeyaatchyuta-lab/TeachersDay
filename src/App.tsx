@@ -3,19 +3,23 @@ import { CursorProvider, useCursor } from './context/CursorContext';
 import { CustomCursor } from './components/CustomCursor';
 import { Sidebar } from './components/Sidebar';
 import { Hero } from './components/Hero';
+import { DepartmentJourney } from './components/DepartmentJourney';
 import { AppreciationSection } from './components/AppreciationSection';
-import { TeacherSelection } from './components/TeacherSelection';
+import { FacultySection } from './components/FacultySection';
 import { SaradaModal } from './components/SaradaModal';
+import { BhagawanModal } from './components/BhagawanModal';
 import { KrantiModal } from './components/KrantiModal';
+import { KishoreModal } from './components/KishoreModal';
+import { RadhaKrishnaModal } from './components/RadhaKrishnaModal';
 import { QuoteSection } from './components/QuoteSection';
 import { FinalSection } from './components/FinalSection';
 import { Footer } from './components/Footer';
 import { Toast } from './components/Toast';
 import type { ToastData } from './components/Toast';
-import type { MiniSurprise } from './types';
+import type { MiniSurprise, TeacherId } from './types';
 
 function MainApp() {
-  const [activeTeacher, setActiveTeacher] = useState<'sarada' | 'kranti' | null>(null);
+  const [activeTeacher, setActiveTeacher] = useState<TeacherId | null>(null);
   const [toast, setToast] = useState<ToastData | null>(null);
   const toastTimeoutRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const { setCursorType } = useCursor();
@@ -24,14 +28,20 @@ function MainApp() {
   useEffect(() => {
     if (activeTeacher === 'sarada') {
       setCursorType('sarada-modal');
+    } else if (activeTeacher === 'bhagawan') {
+      setCursorType('bhagawan-modal');
     } else if (activeTeacher === 'kranti') {
       setCursorType('kranti-modal');
+    } else if (activeTeacher === 'kishore') {
+      setCursorType('kishore-modal');
+    } else if (activeTeacher === 'radhakrishna') {
+      setCursorType('radhakrishna-modal');
     } else {
       setCursorType('default');
     }
   }, [activeTeacher, setCursorType]);
 
-  const handleSelectTeacher = (id: 'sarada' | 'kranti') => {
+  const handleSelectTeacher = (id: TeacherId) => {
     setActiveTeacher(id);
   };
 
@@ -77,11 +87,14 @@ function MainApp() {
           onSelectTeacher={handleSelectTeacher} 
         />
 
+        {/* AIML 7-Stage Department Learning Journey */}
+        <DepartmentJourney onSelectTeacher={handleSelectTeacher} />
+
         {/* Introduction Section: "More Than a Teacher" */}
         <AppreciationSection />
 
-        {/* Teacher Selection Section: "Two Special Surprises" */}
-        <TeacherSelection onSelectTeacher={handleSelectTeacher} />
+        {/* The People Behind Our Journey: Asymmetric 5-Mentor Faculty Section */}
+        <FacultySection onSelectTeacher={handleSelectTeacher} />
 
         {/* Quote Section with Starlight */}
         <QuoteSection />
@@ -99,9 +112,27 @@ function MainApp() {
         onClose={handleCloseModal}
       />
 
+      {/* Bhagawan Sir Dedicated Modal Experience */}
+      <BhagawanModal
+        isOpen={activeTeacher === 'bhagawan'}
+        onClose={handleCloseModal}
+      />
+
       {/* Kranti Madam Dedicated Modal Experience */}
       <KrantiModal
         isOpen={activeTeacher === 'kranti'}
+        onClose={handleCloseModal}
+      />
+
+      {/* Kishore Sir Dedicated Modal Experience */}
+      <KishoreModal
+        isOpen={activeTeacher === 'kishore'}
+        onClose={handleCloseModal}
+      />
+
+      {/* Radha Krishna Sir Dedicated Modal Experience */}
+      <RadhaKrishnaModal
+        isOpen={activeTeacher === 'radhakrishna'}
         onClose={handleCloseModal}
       />
 

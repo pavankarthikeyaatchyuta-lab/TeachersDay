@@ -61,10 +61,10 @@ export const QuoteSection = () => {
         >
           <blockquote className="text-2xl sm:text-4xl md:text-5xl font-display font-light leading-relaxed sm:leading-snug text-slate-100 max-w-3xl mx-auto">
             <span className="block">
-              "Years from now, we may forget what was written on the board...
+              "A teacher may enter our classroom for a lesson,
             </span>
             <span className="block mt-4 text-amber-200 font-medium italic">
-              but we'll remember who stood in front of it and taught us."
+              but the right teacher becomes part of our journey long after the lesson ends."
             </span>
           </blockquote>
 
@@ -77,10 +77,10 @@ export const QuoteSection = () => {
           >
             <div className="h-px w-20 bg-gradient-to-r from-transparent via-amber-400 to-transparent" />
             <p className="text-sm sm:text-base tracking-widest uppercase font-medium text-slate-300">
-              — With gratitude to our teachers
+              To all our AIML mentors — thank you. ❤️
             </p>
             <span className="text-xs text-amber-400/80 font-normal">
-              Sarada Madam &amp; Kranti Madam
+              Sarada Madam • Bhagawan Sir • Kranti Madam • Kishore Sir • Radha Krishna Sir
             </span>
           </motion.div>
         </motion.div>
